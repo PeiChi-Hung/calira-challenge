@@ -1,4 +1,4 @@
-export const mockData = [
+[
   {
     "id": "1",
     "user": "user_01",
@@ -69,4 +69,4 @@ export const mockData = [
     "sentiment": "positive",
     "length": 36
   }
-];
+]
