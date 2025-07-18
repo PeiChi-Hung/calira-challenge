@@ -1,0 +1,72 @@
+export const mockData = [
+  {
+    "id": "1",
+    "user": "user_01",
+    "text": "Great work team, we nailed the deadline!",
+    "sentiment": "positive",
+    "length": 38
+  },
+  {
+    "id": "2",
+    "user": "user_02",
+    "text": "Can we follow up on the tasks from yesterday?",
+    "sentiment": "neutral",
+    "length": 44
+  },
+  {
+    "id": "3",
+    "user": "user_03",
+    "text": "I'm feeling overwhelmed with the workload.",
+    "sentiment": "negative",
+    "length": 41
+  },
+  {
+    "id": "4",
+    "user": "user_04",
+    "text": "Looking forward to our upcoming launch!",
+    "sentiment": "positive",
+    "length": 37
+  },
+  {
+    "id": "5",
+    "user": "user_05",
+    "text": "Let's improve our documentation process.",
+    "sentiment": "neutral",
+    "length": 39
+  },
+  {
+    "id": "6",
+    "user": "user_06",
+    "text": "I'm concerned about recent delays.",
+    "sentiment": "negative",
+    "length": 34
+  },
+  {
+    "id": "7",
+    "user": "user_07",
+    "text": "Fantastic collaboration on the last sprint.",
+    "sentiment": "positive",
+    "length": 42
+  },
+  {
+    "id": "8",
+    "user": "user_08",
+    "text": "Does anyone need help with today's tasks?",
+    "sentiment": "neutral",
+    "length": 41
+  },
+  {
+    "id": "9",
+    "user": "user_09",
+    "text": "We really need clearer guidelines.",
+    "sentiment": "negative",
+    "length": 33
+  },
+  {
+    "id": "10",
+    "user": "user_10",
+    "text": "Super excited about the new features!",
+    "sentiment": "positive",
+    "length": 36
+  }
+];
