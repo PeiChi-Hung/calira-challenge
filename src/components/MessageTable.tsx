@@ -175,9 +175,12 @@ const MessageTable = ({ data }: MessageTableProps) => {
   };
 
   return (
-    <Card>
+    <Card className="transition-all duration-300 hover:shadow-lg">
       <CardHeader>
-        <CardTitle>Message Details</CardTitle>
+        <CardTitle className="flex items-center gap-2">
+          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 animate-pulse"></span>
+          Message Details
+        </CardTitle>
       </CardHeader>
       <CardContent>
         {/* Search and Filter Controls */}
@@ -188,14 +191,14 @@ const MessageTable = ({ data }: MessageTableProps) => {
               placeholder="Search messages, users, or sentiment..."
               value={globalFilter}
               onChange={(e) => setGlobalFilter(e.target.value)}
-              className="pl-10"
+              className="pl-10 transition-all duration-300 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
             />
           </div>
           <div className="flex gap-2">
             <select
               value={sentimentFilterValue}
               onChange={(e) => handleSentimentFilter(e.target.value)}
-              className="px-3 py-2 rounded-md border border-input bg-background text-sm"
+              className="px-3 py-2 rounded-md border border-input bg-background text-sm transition-all duration-300 hover:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer"
             >
               <option value="all">All Sentiments</option>
               <option value="positive">Positive</option>
