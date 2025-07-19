@@ -6,13 +6,17 @@ import MessageTable from "./components/MessageTable";
 import SentimentChart from "./components/SentimentChart";
 import SummaryCards from "./components/SummaryCards";
 import mockDataJson from "./data/mockData.json";
-import { calculateSummaryStats, processSentimentData, processMessageLengthData } from "./lib/analytics";
+import {
+  calculateSummaryStats,
+  processSentimentData,
+  processMessageLengthData,
+} from "./lib/analytics";
 import type { Message } from "./types/analytics";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
-  
+
   const mockData: Message[] = mockDataJson as Message[];
   const summaryStats = calculateSummaryStats(mockData);
   const sentimentData = processSentimentData(mockData);
@@ -36,19 +40,27 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
-        <div className={`text-center mb-8 transition-all duration-700 ${
-          isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-        }`}>
-          <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            📊 Team Analytics Dashboard
+        <div
+          className={`text-center mb-8 transition-all duration-700 ${
+            isVisible
+              ? "opacity-100 transform translate-y-0"
+              : "opacity-0 transform translate-y-4"
+          }`}
+        >
+          <h1 className="text-3xl font-bold mb-2 bg-clip-text text-black">
+            Team Analytics Dashboard
           </h1>
           <p className="text-gray-600">
             Insights from team communications and engagement
           </p>
         </div>
-        <div className={`space-y-6 transition-all duration-700 delay-200 ${
-          isVisible ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform translate-y-4'
-        }`}>
+        <div
+          className={`space-y-6 transition-all duration-700 delay-200 ${
+            isVisible
+              ? "opacity-100 transform translate-y-0"
+              : "opacity-0 transform translate-y-4"
+          }`}
+        >
           <div className="animate-in slide-in-from-bottom-2 duration-500 delay-300">
             <SummaryCards stats={summaryStats} />
           </div>

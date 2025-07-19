@@ -21,14 +21,23 @@ import {
 } from "./ui/table";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  ChevronsLeft, 
+import {
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
   ChevronsRight,
   ArrowUpDown,
-  Search
+  Search,
+  X,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { Badge } from "./ui/badge";
 import type { Message } from "../types/analytics";
 
 interface MessageTableProps {
@@ -42,9 +51,9 @@ interface MessageCellProps {
 const MessageCell = ({ text }: MessageCellProps) => {
   const isLong = text.length > 80;
   const [expanded, setExpanded] = useState(false);
-  
+
   return (
-    <div className="max-w-md">
+    <div className="max-w-xs sm:max-w-md lg:max-w-lg whitespace-normal">
       <div className="text-sm">
         {isLong && !expanded ? `${text.slice(0, 80)}...` : text}
       </div>
@@ -69,14 +78,13 @@ const columns: ColumnDef<Message>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="h-auto p-0 font-medium hover:bg-transparent"
       >
         User
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
     cell: ({ row }) => (
-      <div className="font-medium text-blue-600">{row.getValue("user")}</div>
+      <div className="font-medium">{row.getValue("user")}</div>
     ),
   },
   {
@@ -94,22 +102,26 @@ const columns: ColumnDef<Message>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="h-auto p-0 font-medium hover:bg-transparent"
       >
         Sentiment
         <ArrowUpDown className="ml-2 h-4 w-4" />
       </Button>
     ),
     cell: ({ row }) => {
-      const sentiment = row.getValue("sentiment") as 'positive' | 'neutral' | 'negative';
-      const colors: Record<'positive' | 'neutral' | 'negative', string> = {
+      const sentiment = row.getValue("sentiment") as
+        | "positive"
+        | "neutral"
+        | "negative";
+      const colors: Record<"positive" | "neutral" | "negative", string> = {
         positive: "bg-green-100 text-green-800 border-green-200",
         neutral: "bg-gray-100 text-gray-800 border-gray-200",
         negative: "bg-red-100 text-red-800 border-red-200",
       };
-      
+
       return (
-        <span className={`px-2 py-1 rounded-full text-xs font-medium border ${colors[sentiment]}`}>
+        <span
+          className={`px-2 py-1 rounded-full text-xs font-medium border ${colors[sentiment]}`}
+        >
           {sentiment.charAt(0).toUpperCase() + sentiment.slice(1)}
         </span>
       );
@@ -121,7 +133,7 @@ const columns: ColumnDef<Message>[] = [
       <Button
         variant="ghost"
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        className="h-auto p-0 font-medium hover:bg-transparent"
+        className="h-auto p-0 justify-start"
       >
         Length
         <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -161,15 +173,16 @@ const MessageTable = ({ data }: MessageTableProps) => {
     },
   });
 
-  const sentimentFilterValue = (columnFilters.find(f => f.id === "sentiment")?.value as string) || "all";
+  const sentimentFilterValue =
+    (columnFilters.find((f) => f.id === "sentiment")?.value as string) || "all";
 
   const handleSentimentFilter = (value: string) => {
     if (value === "all") {
-      setColumnFilters(prev => prev.filter(f => f.id !== "sentiment"));
+      setColumnFilters((prev) => prev.filter((f) => f.id !== "sentiment"));
     } else {
-      setColumnFilters(prev => [
-        ...prev.filter(f => f.id !== "sentiment"),
-        { id: "sentiment", value }
+      setColumnFilters((prev) => [
+        ...prev.filter((f) => f.id !== "sentiment"),
+        { id: "sentiment", value },
       ]);
     }
   };
@@ -177,45 +190,105 @@ const MessageTable = ({ data }: MessageTableProps) => {
   return (
     <Card className="transition-all duration-300 hover:shadow-lg">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-purple-400 to-pink-400 animate-pulse"></span>
-          Message Details
-        </CardTitle>
+        <CardTitle>Message Details</CardTitle>
       </CardHeader>
       <CardContent>
         {/* Search and Filter Controls */}
-        <div className="flex flex-col sm:flex-row gap-4 mb-6">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <Input
-              placeholder="Search messages, users, or sentiment..."
-              value={globalFilter}
-              onChange={(e) => setGlobalFilter(e.target.value)}
-              className="pl-10 transition-all duration-300 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
-            />
+        <div className="space-y-4 mb-6">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
+            <div className="relative flex-1 min-w-0">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+              <Input
+                placeholder="Search messages, users, or sentiment..."
+                value={globalFilter}
+                onChange={(e) => setGlobalFilter(e.target.value)}
+                className="pl-10 pr-10 w-full transition-all duration-300 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500"
+              />
+              {globalFilter && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setGlobalFilter("")}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 h-6 w-6 p-0 hover:bg-gray-100"
+                >
+                  <X className="h-3 w-3" />
+                </Button>
+              )}
+            </div>
+            <div className="flex gap-2 sm:flex-shrink-0">
+              <Select
+                value={sentimentFilterValue}
+                onValueChange={handleSentimentFilter}
+              >
+                <SelectTrigger className="w-[140px]">
+                  <SelectValue placeholder="All Sentiments" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">All Sentiments</SelectItem>
+                  <SelectItem value="positive">Positive</SelectItem>
+                  <SelectItem value="neutral">Neutral</SelectItem>
+                  <SelectItem value="negative">Negative</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-          <div className="flex gap-2">
-            <select
-              value={sentimentFilterValue}
-              onChange={(e) => handleSentimentFilter(e.target.value)}
-              className="px-3 py-2 rounded-md border border-input bg-background text-sm transition-all duration-300 hover:border-blue-500 focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer"
-            >
-              <option value="all">All Sentiments</option>
-              <option value="positive">Positive</option>
-              <option value="neutral">Neutral</option>
-              <option value="negative">Negative</option>
-            </select>
-          </div>
+
+          {/* Active Filters */}
+          {(globalFilter || sentimentFilterValue !== "all") && (
+            <div className="flex items-center gap-2 text-sm">
+              <span className="text-muted-foreground">Active filters:</span>
+              {globalFilter && (
+                <Badge variant="secondary" className="gap-1">
+                  "{globalFilter}"
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setGlobalFilter("")}
+                    className="h-3 w-3 p-0 hover:bg-transparent"
+                  >
+                    <X className="h-2 w-2" />
+                  </Button>
+                </Badge>
+              )}
+              {sentimentFilterValue !== "all" && (
+                <Badge variant="secondary" className="gap-1">
+                  {sentimentFilterValue}
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleSentimentFilter("all")}
+                    className="h-3 w-3 p-0 hover:bg-transparent"
+                  >
+                    <X className="h-2 w-2" />
+                  </Button>
+                </Badge>
+              )}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  setGlobalFilter("");
+                  handleSentimentFilter("all");
+                }}
+                className="text-xs text-muted-foreground hover:text-foreground"
+              >
+                Clear all
+              </Button>
+            </div>
+          )}
         </div>
 
         {/* Table */}
-        <div className="rounded-md border">
+        <div className="overflow-auto rounded-lg border">
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-muted/50 sticky top-0 z-10">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id} className="font-medium">
+                    <TableHead
+                      key={header.id}
+                      className="font-medium whitespace-nowrap"
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -235,7 +308,10 @@ const MessageTable = ({ data }: MessageTableProps) => {
                     data-state={row.getIsSelected() && "selected"}
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
+                      <TableCell
+                        key={cell.id}
+                        className="text-left whitespace-nowrap"
+                      >
                         {flexRender(
                           cell.column.columnDef.cell,
                           cell.getContext()
@@ -261,9 +337,14 @@ const MessageTable = ({ data }: MessageTableProps) => {
         {/* Pagination */}
         <div className="flex items-center justify-between space-x-2 py-4">
           <div className="text-sm text-gray-700">
-            Showing {table.getState().pagination.pageIndex * table.getState().pagination.pageSize + 1} to{" "}
+            Showing{" "}
+            {table.getState().pagination.pageIndex *
+              table.getState().pagination.pageSize +
+              1}{" "}
+            to{" "}
             {Math.min(
-              (table.getState().pagination.pageIndex + 1) * table.getState().pagination.pageSize,
+              (table.getState().pagination.pageIndex + 1) *
+                table.getState().pagination.pageSize,
               table.getFilteredRowModel().rows.length
             )}{" "}
             of {table.getFilteredRowModel().rows.length} entries
