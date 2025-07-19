@@ -68,5 +68,110 @@
     "text": "Super excited about the new features!",
     "sentiment": "positive",
     "length": 36
+  },
+  {
+    "id": "11",
+    "user": "user_11",
+    "text": "The new UI design looks amazing, well done everyone!",
+    "sentiment": "positive",
+    "length": 52
+  },
+  {
+    "id": "12",
+    "user": "user_12",
+    "text": "Can we schedule a meeting to discuss the roadmap?",
+    "sentiment": "neutral",
+    "length": 48
+  },
+  {
+    "id": "13",
+    "user": "user_13",
+    "text": "I'm struggling with the current implementation approach.",
+    "sentiment": "negative",
+    "length": 55
+  },
+  {
+    "id": "14",
+    "user": "user_14",
+    "text": "The deployment went smoothly, great job team!",
+    "sentiment": "positive",
+    "length": 44
+  },
+  {
+    "id": "15",
+    "user": "user_15",
+    "text": "We should consider updating our testing strategy.",
+    "sentiment": "neutral",
+    "length": 47
+  },
+  {
+    "id": "16",
+    "user": "user_16",
+    "text": "The client feedback has been quite disappointing.",
+    "sentiment": "negative",
+    "length": 47
+  },
+  {
+    "id": "17",
+    "user": "user_17",
+    "text": "Outstanding performance metrics this quarter!",
+    "sentiment": "positive",
+    "length": 43
+  },
+  {
+    "id": "18",
+    "user": "user_18",
+    "text": "What's the status on the API integration?",
+    "sentiment": "neutral",
+    "length": 40
+  },
+  {
+    "id": "19",
+    "user": "user_19",
+    "text": "We're facing some serious technical debt issues.",
+    "sentiment": "negative",
+    "length": 47
+  },
+  {
+    "id": "20",
+    "user": "user_20",
+    "text": "The team spirit has been incredible lately!",
+    "sentiment": "positive",
+    "length": 41
+  },
+  {
+    "id": "21",
+    "user": "user_21",
+    "text": "Should we prioritize the mobile app features?",
+    "sentiment": "neutral",
+    "length": 43
+  },
+  {
+    "id": "22",
+    "user": "user_22",
+    "text": "The budget constraints are really limiting our options.",
+    "sentiment": "negative",
+    "length": 54
+  },
+  {
+    "id": "23",
+    "user": "user_23",
+    "text": "Brilliant solution to the performance bottleneck!",
+    "sentiment": "positive",
+    "length": 47
+  },
+  {
+    "id": "24",
+    "user": "user_24",
+    "text": "Let's review the security protocols next week.",
+    "sentiment": "neutral",
+    "length": 43
+  },
+  {
+    "id": "25",
+    "user": "user_25",
+    "text": "The constant scope creep is becoming unmanageable.",
+    "sentiment": "negative",
+    "length": 50
   }
 ]

@@ -60,10 +60,13 @@ export function processMessageLengthData(
     return acc;
   }, {} as Record<string, { total: number; count: number }>);
 
-  return Object.entries(userLengths).map(([user, data]) => ({
-    user,
-    length: Math.round(data.total / data.count),
-  }));
+  return Object.entries(userLengths)
+    .map(([user, data]) => ({
+      user,
+      length: Math.round(data.total / data.count),
+    }))
+    .sort((a, b) => b.length - a.length) // Sort by length descending
+    .slice(0, 10); // Take only top 10 users
 }
 
 export function filterMessages(

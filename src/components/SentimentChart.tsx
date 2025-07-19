@@ -1,17 +1,31 @@
+import { Cell, Legend, Pie, PieChart } from "recharts";
+import type { SentimentData } from "../types/analytics";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import {
-  Cell,
-  Legend,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from "recharts";
-import type { SentimentData } from "../types/analytics";
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  type ChartConfig,
+} from "./ui/chart";
 
 interface SentimentChartProps {
   data: SentimentData[];
 }
+
+const chartConfig = {
+  positive: {
+    label: "Positive",
+    color: "#10b981",
+  },
+  neutral: {
+    label: "Neutral",
+    color: "#6b7280",
+  },
+  negative: {
+    label: "Negative",
+    color: "#ef4444",
+  },
+} satisfies ChartConfig;
 
 interface LabelProps {
   cx: number;
@@ -53,12 +67,15 @@ const SentimentChart = ({ data }: SentimentChartProps) => {
   };
 
   return (
-    <Card>
+    <Card className="transition-all duration-300 hover:shadow-lg group">
       <CardHeader>
         <CardTitle>Sentiment Distribution</CardTitle>
       </CardHeader>
       <CardContent>
-        <ResponsiveContainer width="100%" height={300}>
+        <ChartContainer
+          config={chartConfig}
+          className="mx-auto aspect-square max-h-[300px]"
+        >
           <PieChart>
             <Pie
               data={data}
@@ -69,18 +86,21 @@ const SentimentChart = ({ data }: SentimentChartProps) => {
               outerRadius={80}
               fill="#8884d8"
               dataKey="value"
+              animationBegin={0}
+              animationDuration={800}
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.color}
+                  className="transition-opacity duration-300 hover:opacity-80"
+                />
               ))}
             </Pie>
-            <Tooltip
-              formatter={(value: number) => [`${value} messages`, "Count"]}
-              labelFormatter={(label: string) => `${label} Sentiment`}
-            />
-            <Legend />
+            <ChartTooltip content={<ChartTooltipContent />} />
+            <Legend wrapperStyle={{ paddingTop: "20px" }} iconType="circle" />
           </PieChart>
-        </ResponsiveContainer>
+        </ChartContainer>
       </CardContent>
     </Card>
   );
