@@ -7,7 +7,7 @@ import type {
 
 export function calculateSummaryStats(messages: Message[]): SummaryStats {
   const totalMessages = messages.length;
-  const averageLength =
+  const averageLength = totalMessages === 0 ? 0 :
     messages.reduce((sum, msg) => sum + msg.length, 0) / totalMessages;
 
   const sentimentCounts = messages.reduce((acc, msg) => {
