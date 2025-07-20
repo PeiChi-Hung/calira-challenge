@@ -173,5 +173,61 @@
     "text": "The constant scope creep is becoming unmanageable.",
     "sentiment": "negative",
     "length": 50
+  },
+  {
+    "id": "26",
+    "user": "user_01",
+    "text": "Just finished the code review - looks solid!",
+    "sentiment": "positive",
+    "length": 43
+  },
+  {
+    "id": "27",
+    "user": "user_01", 
+    "text": "Running into some issues with the database connection.",
+    "sentiment": "negative",
+    "length": 54
+  },
+  {
+    "id": "28",
+    "user": "user_02",
+    "text": "The meeting is scheduled for 3 PM today.",
+    "sentiment": "neutral",
+    "length": 39
+  },
+  {
+    "id": "29",
+    "user": "user_02",
+    "text": "Excellent progress on the frontend redesign!",
+    "sentiment": "positive", 
+    "length": 43
+  },
+  {
+    "id": "30",
+    "user": "user_03",
+    "text": "Thanks for the support on the debugging session.",
+    "sentiment": "positive",
+    "length": 47
+  },
+  {
+    "id": "31",
+    "user": "user_03",
+    "text": "Let me know if you need any clarification on the requirements.",
+    "sentiment": "neutral",
+    "length": 63
+  },
+  {
+    "id": "32",
+    "user": "user_10",
+    "text": "The performance improvements are working great!",
+    "sentiment": "positive",
+    "length": 45
+  },
+  {
+    "id": "33", 
+    "user": "user_10",
+    "text": "We might need to refactor the authentication module.",
+    "sentiment": "neutral",
+    "length": 52
   }
 ]
